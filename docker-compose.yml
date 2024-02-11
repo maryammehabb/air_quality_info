@@ -1,0 +1,28 @@
+version: "3"
+services:
+  # node-app:
+  #   container_name: air-quality-container
+  #   build: .
+  #   ports:
+  #     - "3000:3000"
+  #   env_file:
+  #     - ./.env
+  #   depends_on:
+  #     - db
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - postgres-db:/var/lib/postgres/data
+    environment:
+      POSTGRES_DB: ${DB_USERNAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  postgres-db:
